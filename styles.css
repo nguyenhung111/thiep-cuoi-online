@@ -1,0 +1,998 @@
+/* ==========================================================================
+   Fonts: Local @font-face declarations
+   ========================================================================== */
+@font-face {
+  font-family: '1FTV VIP Eleanor Goenka';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('public/assets/fonts/1ftv-vip-eleanor-goenka.otf') format('opentype');
+}
+@font-face {
+  font-family: '1ftv Vip High Spirited 63416d';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('public/assets/fonts/1ftv-vip-high-spirited.otf') format('opentype');
+}
+@font-face {
+  font-family: 'DFVN Mighty Wings';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('public/assets/fonts/dfvn-mighty-wings.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Flavinda d393f3';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('public/assets/fonts/flavinda.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Fz Manchester Signature';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('public/assets/fonts/fz-manchester-signature.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('public/assets/fonts/lora.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Lora Semibold 39de4b';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('public/assets/fonts/lora-semibold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Mtd Hello Paris Serif b7e5f0';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('public/assets/fonts/mtd-hello-paris-serif.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SVN-Gilroy';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('public/assets/fonts/svn-gilroy.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Uvn Hoa Tay 1 97b16e';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('public/assets/fonts/uvn-hoa-tay-1.ttf') format('truetype');
+}
+
+/* ==========================================================================
+   Base Layout & Canvas Framing
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-color: #f5f5f4;
+  color: #911911;
+  font-family: 'Lora', serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f5f5f4;
+}
+
+.canvas-viewport {
+  width: 100%;
+  max-width: 500px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+  background-color: #ffffff;
+}
+
+.freeform-canvas {
+  width: 500px;
+  height: 7322px;
+  position: relative;
+  isolation: isolate;
+  background-color: #ffffff;
+  overflow: hidden;
+  transform-origin: top left;
+}
+
+.freeform-element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform, opacity;
+}
+
+.freeform-text {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: pre-line;
+  word-break: break-word;
+  user-select: text;
+}
+
+.freeform-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.freeform-shape {
+  width: 100%;
+  height: 100%;
+}
+
+/* ==========================================================================
+   Opening Curtain Effect: curtain-reveal-red ("Màn đỏ")
+   ========================================================================== */
+.curtain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+  cursor: pointer;
+  background: transparent;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+
+.curtain-overlay.is-dismissing {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.curtain-overlay.is-hidden {
+  display: none;
+}
+
+.curtain-panel {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+  transition: transform 3s cubic-bezier(0.65, 0, 0.35, 1) 0.5s;
+}
+
+.curtain-panel img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+.curtain-overlay.open .curtain-panel.left {
+  transform: translateX(-100%);
+}
+
+.curtain-overlay.open .curtain-panel.right {
+  transform: translateX(100%);
+}
+
+.curtain-hint {
+  position: absolute;
+  bottom: max(24px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background: rgba(145, 25, 17, 0.78);
+  color: #fff;
+  font-family: 'Lora', serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 215, 170, 0.5);
+  pointer-events: none;
+  opacity: 0.9;
+  transition: opacity 0.4s ease;
+}
+
+.curtain-overlay.open .curtain-hint {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .curtain-panel {
+    transition-duration: 0.4s;
+    transition-delay: 0s;
+  }
+}
+
+/* ==========================================================================
+   Scroll-Triggered & Continuous Animations (Exact Keyframes)
+   ========================================================================== */
+@keyframes freeform-fade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes freeform-slide-up {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes freeform-slide-down {
+  0% { opacity: 0; transform: translateY(-40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes freeform-slide-left {
+  0% { opacity: 0; transform: translateX(40px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes freeform-slide-right {
+  0% { opacity: 0; transform: translateX(-40px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes freeform-zoom-in {
+  0% { opacity: 0; transform: scale(0.6); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes freeform-zoom-out {
+  0% { opacity: 0; transform: scale(1.4); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes freeform-bounce {
+  0% { opacity: 0; transform: translateY(40px); }
+  60% { opacity: 1; transform: translateY(-10px); }
+  80% { transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes freeform-loop-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .anim-pending {
+    opacity: 0;
+  }
+
+  .freeform-anim {
+    animation-fill-mode: both;
+    animation-duration: var(--anim-duration, 2.5s);
+    animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .freeform-anim-fade { animation-name: freeform-fade; }
+  .freeform-anim-slide-up { animation-name: freeform-slide-up; }
+  .freeform-anim-slide-down { animation-name: freeform-slide-down; }
+  .freeform-anim-slide-left { animation-name: freeform-slide-left; }
+  .freeform-anim-slide-right { animation-name: freeform-slide-right; }
+  .freeform-anim-zoom-in { animation-name: freeform-zoom-in; }
+  .freeform-anim-zoom-out { animation-name: freeform-zoom-out; }
+  .freeform-anim-bounce { animation-name: freeform-bounce; }
+
+  .freeform-loop-pulse {
+    animation: freeform-loop-pulse var(--loop-duration, 1s) ease-in-out infinite;
+  }
+}
+
+/* ==========================================================================
+   Countdown Widget
+   ========================================================================== */
+.countdown-box {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  align-items: center;
+  justify-items: center;
+  color: #911911;
+  font-family: 'SVN-Gilroy', sans-serif;
+}
+
+.countdown-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.15;
+}
+
+.countdown-value {
+  font-size: 33.6px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown-label {
+  font-size: 17.85px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin-top: 2px;
+}
+
+/* ==========================================================================
+   3D Album Slider (bd-alb-3d)
+   ========================================================================== */
+.bd-alb-3d {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 16px;
+  overflow: visible;
+  z-index: 10;
+  min-height: 100%;
+  color: #911911;
+}
+
+.bd-alb-3d h2 {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #911911;
+  font-family: "Times New Roman", serif;
+  font-size: 22px;
+  letter-spacing: 1px;
+  margin: 0;
+  text-align: center;
+}
+
+.bd-alb-3d .wrap {
+  margin-top: 18px;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+.bd-alb-3d .stage {
+  --w: 190px;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  height: calc(var(--w) * 4 / 3 + 32px);
+  perspective: 1000px;
+}
+
+.bd-alb-3d .track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.bd-alb-3d .slide {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  width: var(--w);
+  aspect-ratio: 3 / 4;
+  margin-left: calc(var(--w) / -2);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+.bd-alb-3d .slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bd-alb-3d .nav {
+  position: absolute;
+  top: 50%;
+  width: 32px;
+  height: 32px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  border: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  color: #fff;
+  padding: 0;
+}
+
+.bd-alb-3d .nav:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.bd-alb-3d .nav svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+.bd-alb-3d .nav.prev { left: 4px; }
+.bd-alb-3d .nav.next { right: 4px; }
+
+.bd-alb-3d .counter {
+  margin-top: 12px;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+  text-align: center;
+  font-family: 'Lora', serif;
+}
+
+/* ==========================================================================
+   Guestbook Block (bd-gb-mn)
+   ========================================================================== */
+.bd-gb-mn {
+  padding: 46px 20px 24px;
+  font-family: 'Inter', sans-serif;
+  color: #911911;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.bd-gb-mn h2 {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin: 0 0 4px;
+  font-family: 'Lora Semibold 39de4b', 'Lora', serif;
+}
+
+.bd-gb-mn .sub {
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  opacity: 0.6;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-weight: 300;
+}
+
+.bd-gb-mn form {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto 18px;
+}
+
+.bd-gb-mn input,
+.bd-gb-mn textarea {
+  padding: 11px 0;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.bd-gb-mn textarea {
+  min-height: 56px;
+  border: 1px solid rgba(145, 25, 17, 0.25);
+  border-radius: 4px;
+  padding: 10px 12px;
+}
+
+.bd-gb-mn input::placeholder,
+.bd-gb-mn textarea::placeholder {
+  color: inherit;
+  opacity: 0.45;
+}
+
+.bd-gb-mn input:focus-visible,
+.bd-gb-mn textarea:focus-visible {
+  outline: 2px solid #911911;
+  outline-offset: 2px;
+}
+
+.bd-gb-mn .gb-side-picker {
+  display: flex;
+  gap: 8px;
+}
+
+.bd-gb-mn .gb-side-opt {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  font-size: 12px;
+  opacity: 0.6;
+  transition: all 0.15s;
+  user-select: none;
+  flex: 1;
+  justify-content: center;
+  letter-spacing: 0.04em;
+}
+
+.bd-gb-mn .gb-side-opt input[type="radio"] {
+  position: absolute;
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.bd-gb-mn .gb-side-opt:has(input:checked) {
+  opacity: 1;
+  background: #911911;
+  color: #fff;
+  font-weight: 600;
+}
+
+.bd-gb-mn .gb-side-opt:has(input:focus-visible) {
+  outline: 2px solid #911911;
+  outline-offset: 2px;
+}
+
+.bd-gb-mn .gb-submit {
+  padding: 12px;
+  min-height: 44px;
+  background: transparent;
+  color: inherit;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-family: inherit;
+  cursor: pointer;
+  font-size: 11px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.bd-gb-mn .gb-submit:hover {
+  background: #911911;
+  color: #fff;
+}
+
+.bd-gb-mn .gb-list-wrap {
+  max-height: 210px;
+  overflow-y: auto;
+  position: relative;
+  padding-top: 14px;
+  padding-right: 6px;
+  border-top: 1px solid rgba(145, 25, 17, 0.12);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(145, 25, 17, 0.3) rgba(145, 25, 17, 0.05);
+}
+
+.bd-gb-mn .gb-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bd-gb-mn .gb-msg {
+  padding: 4px 0 10px;
+  border-bottom: 1px solid rgba(145, 25, 17, 0.08);
+}
+
+.bd-gb-mn .gb-name {
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.bd-gb-mn .gb-side {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-weight: 500;
+  border: 1px solid currentColor;
+}
+
+.bd-gb-mn .gb-side--nha_trai { color: #3b82f6; border-color: #3b82f6; }
+.bd-gb-mn .gb-side--nha_gai  { color: #ec4899; border-color: #ec4899; }
+
+.bd-gb-mn .gb-text {
+  font-size: 13px;
+  line-height: 1.55;
+  opacity: 0.85;
+  margin-top: 3px;
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   RSVP Block (bd-rsvp-s)
+   ========================================================================== */
+.bd-rsvp-s {
+  padding: 44px 32px 24px;
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  color: #911911;
+}
+
+.bd-rsvp-s h2 {
+  font-size: 24px;
+  margin: 0 0 8px;
+  font-weight: 700;
+}
+
+.bd-rsvp-s p {
+  font-size: 13px;
+  opacity: 0.78;
+  margin: 0 0 18px;
+}
+
+.bd-rsvp-s form {
+  max-width: 380px;
+  margin: 0 auto;
+  display: grid;
+  gap: 10px;
+}
+
+.bd-rsvp-s input {
+  padding: 10px 14px;
+  min-height: 44px;
+  border: 1px solid currentColor;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 1rem;
+}
+
+.bd-rsvp-s input::placeholder {
+  color: inherit;
+  opacity: 0.55;
+}
+
+.bd-rsvp-s .row {
+  display: flex;
+  gap: 8px;
+}
+
+.bd-rsvp-s button {
+  flex: 1;
+  padding: 12px;
+  min-height: 44px;
+  border: 0;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 16px;
+  transition: opacity 0.2s;
+}
+
+.bd-rsvp-s button:hover { opacity: 0.88; }
+.bd-rsvp-s .yes { background: #d97a85; color: #fff; }
+.bd-rsvp-s .no { background: transparent; color: inherit; border: 1px solid currentColor; opacity: 0.75; }
+
+/* ==========================================================================
+   QR Box Trigger & Floating Music Button
+   ========================================================================== */
+.qr-box-trigger {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-box-trigger img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.15s ease;
+}
+
+.qr-box-trigger:hover img {
+  transform: scale(1.04);
+}
+
+@keyframes freeform-music-pulse {
+  0%, 100% {
+    box-shadow: 0 4px 14px rgba(145, 25, 17, 0.35), 0 0 0 0 rgba(145, 25, 17, 0.45);
+  }
+  50% {
+    box-shadow: 0 4px 14px rgba(145, 25, 17, 0.35), 0 0 0 10px rgba(145, 25, 17, 0);
+  }
+}
+
+@keyframes music-note-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.music-fab {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 900;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.9);
+  color: #2a1a1a;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  backdrop-filter: blur(8px);
+}
+
+.music-fab svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .music-fab.playing {
+    animation: freeform-music-pulse 2s ease-in-out infinite;
+  }
+
+  .music-fab.playing svg {
+    animation: music-note-spin 4s linear infinite;
+  }
+}
+
+/* ==========================================================================
+   Native <dialog> Modals (QR Gift & Photo Lightbox)
+   ========================================================================== */
+dialog.meli-dialog {
+  border: 0;
+  border-radius: 16px;
+  padding: 0;
+  max-width: min(92vw, 400px);
+  width: 100%;
+  background: #ffffff;
+  color: #1f2937;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(0.95);
+  transition:
+    opacity 0.22s ease-out,
+    transform 0.22s ease-out,
+    display 0.22s,
+    overlay 0.22s;
+  transition-behavior: allow-discrete;
+}
+
+dialog.meli-dialog[open] {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@starting-style {
+  dialog.meli-dialog[open] {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+dialog.meli-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(3px);
+}
+
+.qr-dialog-head {
+  background: linear-gradient(135deg, #911911, #b91c1c);
+  color: #fff;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.qr-dialog-head h3 {
+  margin: 0;
+  font-family: 'Lora', serif;
+  font-size: 18px;
+}
+
+.dialog-close-btn {
+  background: rgba(255, 255, 255, 0.18);
+  border: 0;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-dialog-body {
+  padding: 20px;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+
+.qr-dialog-body img {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 12px;
+}
+
+.qr-bank-info {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #374151;
+}
+
+.qr-copy-btn {
+  margin-top: 12px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid #911911;
+  background: #911911;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+dialog.lightbox-dialog {
+  max-width: min(96vw, 760px);
+  background: #111;
+  color: #fff;
+}
+
+.lightbox-body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  gap: 10px;
+}
+
+.lightbox-stage {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-stage img {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+}
+
+.lightbox-nav:hover { background: rgba(0, 0, 0, 0.88); }
+.lightbox-nav.prev { left: 8px; }
+.lightbox-nav.next { right: 8px; }
+
+.lightbox-counter {
+  font-family: 'Lora', serif;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.lightbox-thumbs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  max-width: 100%;
+  padding: 4px 2px;
+  scrollbar-width: thin;
+}
+
+.lightbox-thumb {
+  flex: 0 0 44px;
+  height: 56px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #222;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: opacity 0.15s, border-color 0.15s;
+}
+
+.lightbox-thumb.active {
+  opacity: 1;
+  border-color: #fff;
+}
+
+.lightbox-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 5;
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.visually-hidden {
+  position: absolute;
+  clip-path: inset(50%);
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  white-space: nowrap;
+}
