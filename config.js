@@ -4,34 +4,34 @@
  */
 window.WEDDING_CONFIG = {
   // 1. Tên cô dâu & chú rể
-  brideShortName: 'Trang Nhung',
-  groomShortName: 'Quốc Tùng',
-  heroCoupleTitle: 'TRANG NHUNG & QUỐC TÙNG',
-  brideFullName: 'Phạm Trang Nhung',
-  groomFullName: 'Hoàng Quốc Tùng',
+  brideShortName: 'Quỳnh Trang',
+  groomShortName: 'Văn Hưng',
+  heroCoupleTitle: 'QUỲNH TRANG & VĂN HƯNG',
+  brideFullName: 'Quỳnh Trang',
+  groomFullName: 'Văn Hưng',
 
   // 2. Chữ lồng (2 chữ cái đầu ở phần mở đầu)
   monogramLeft: 'T',
-  monogramRight: 'A',
+  monogramRight: 'H',
 
   // 3. Thời gian & Địa điểm
-  heroDate: '01.08.2026',
-  ceremonyTime: 'VÀO LÚC 16:30, THỨ BẢY',
-  ceremonyDatePipe: '01 | 08 | 2026',
-  lunarDate: '(Tức ngày 19 tháng 06 năm Bính Ngọ)',
-  venueName: 'TẠI TRUNG TÂM TỔ CHỨC\nTIỆC CƯỚI ROYAL',
-  venueAddress: 'Số 8 Mạc Đình Chi, P. Minh Xuân, T. Tuyên Quang',
-  mapsUrl: 'https://maps.app.goo.gl/8tgiZzriGANnVCXc6',
+  heroDate: '27.12.2026',
+  ceremonyTime: 'VÀO LÚC 11:15, CHỦ NHẬT',
+  ceremonyDatePipe: '27 | 12 | 2026',
+  lunarDate: '(Tức ngày 19 tháng 11 năm Bính Ngọ)\nĐãi tiệc: 16:00, Thứ Bảy 26/12/2026 (18/11 ÂL)',
+  venueName: 'TẠI TƯ GIA NHÀ TRAI',
+  venueAddress: 'Thôn Phần Dương, xã Phạm Ngũ Lão,\ntỉnh Hưng Yên',
+  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Th%C3%B4n+Ph%E1%BA%A7n+D%C6%B0%C6%A1ng,+Ph%E1%BA%A1m+Ng%C5%A9+L%C3%A3o,+H%C6%B0ng+Y%C3%AAn',
 
   // Đếm ngược (định dạng YYYY-MM-DDTHH:mm:ss+07:00)
-  countdownTarget: '2026-08-01T16:30:00+07:00',
-  rsvpDeadline: '01-10-2026',
+  countdownTarget: '2026-12-27T11:15:00+07:00',
+  rsvpDeadline: '20-12-2026',
 
   // 4. Thông tin hai gia đình
   brideFamilyTitle: 'NHÀ GÁI',
-  brideParents: 'ÔNG: PHẠM NGỌC CHÍNH\nBÀ: VŨ THỊ TUYÊN',
+  brideParents: 'BÀ: NGUYỄN THỊ HUYỀN\nThôn Ninh Thôn (La Chàng cũ),\nxã Nguyễn Trãi, Hưng Yên',
   groomFamilyTitle: 'NHÀ TRAI',
-  groomParents: 'ÔNG: PHẠM NGỌC CHÍNH\nBÀ: VŨ THỊ TUYÊN',
+  groomParents: 'ÔNG: NGUYỄN VĂN THOÁI\nBÀ: NGUYỄN THỊ MAI\nThôn Phần Dương, xã Phạm Ngũ Lão,\nHưng Yên',
 
   // 5. Tên khách mời mặc định (nếu URL không có ?name=...)
   defaultGuestName: 'Tên Khách Mời',
