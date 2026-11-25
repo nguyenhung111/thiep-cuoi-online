@@ -470,12 +470,23 @@
   });
 
   /* ------------------------------------------------------------------------
-     9. Guestbook (Sổ Lưu Bút) with Local Persistence + Auto-Scroll
+     9. Guestbook (Sổ Lưu Bút) — Google Sheets + Local Fallback + Auto-Scroll
      ------------------------------------------------------------------------ */
   const gbForm = document.getElementById('guestbook-form');
   const gbListWrap = document.getElementById('gb-list-wrap');
   const gbList = document.getElementById('gb-list');
   const GB_STORAGE_KEY = 'meli_clone_guestbook_v1';
+  const sheetApiUrl = (cfg.googleSheetApiUrl || '').trim();
+
+  function postToSheet(payload) {
+    if (!sheetApiUrl) return Promise.resolve();
+    // Dùng text/plain để tránh CORS preflight OPTIONS trên Google Apps Script
+    return fetch(sheetApiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload),
+    }).catch(() => {});
+  }
 
   const defaultMessages = [
     { name: 'Quỳnh Anh', side: 'nha_gai', message: 'Chúc mừng hai bạn! Hạnh phúc trọn đời nhé.' },
@@ -521,6 +532,21 @@
     let messages = loadMessages();
     renderMessages(messages);
 
+    if (sheetApiUrl) {
+      fetch(sheetApiUrl)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data && Array.isArray(data.guestbook) && data.guestbook.length) {
+            messages = data.guestbook;
+            renderMessages(messages);
+            try {
+              localStorage.setItem(GB_STORAGE_KEY, JSON.stringify(messages));
+            } catch {}
+          }
+        })
+        .catch(() => {});
+    }
+
     gbForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const nameInput = document.getElementById('gb-name');
@@ -528,6 +554,7 @@
       const sideInput = gbForm.querySelector('input[name="gb-side-radio"]:checked');
       const name = (nameInput?.value || '').trim();
       const message = (msgInput?.value || '').trim();
+      const side = sideInput?.value || 'nha_trai';
       if (!name) {
         nameInput?.focus();
         return;
@@ -537,12 +564,14 @@
         return;
       }
 
-      messages = [{ name, side: sideInput?.value || 'nha_trai', message }, ...messages];
+      messages = [{ name, side, message }, ...messages];
       try {
         localStorage.setItem(GB_STORAGE_KEY, JSON.stringify(messages));
       } catch {}
       renderMessages(messages);
       if (msgInput) msgInput.value = '';
+
+      postToSheet({ type: 'guestbook', name, side, message });
     });
 
     if (!reducedMotion) {
@@ -596,6 +625,7 @@
       box.appendChild(p);
 
       rsvpForm.replaceChildren(box);
+      postToSheet({ type: 'rsvp', name, attending });
     };
 
     rsvpName?.addEventListener('input', () => rsvpName.setCustomValidity(''));
