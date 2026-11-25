@@ -45,7 +45,7 @@ window.WEDDING_CONFIG = {
 
   // 7b. Google Sheets Web App URL (lưu Sổ Lưu Bút & RSVP chung cho mọi người xem)
   // Hướng dẫn cài đặt chi tiết trong file docs/google-sheets-setup.md
-  googleSheetApiUrl: '',
+  googleSheetApiUrl: 'https://script.google.com/macros/s/AKfycbyKJSUw7iIK3ihEMdZbu1dwrsaqmpMbxoKk3C_eMhXcwIDpg85DtzLjKMLGrd86qLOurw/exec',
 
   // 8. Thông tin chuyển khoản / QR Mừng cưới
   bank: {
