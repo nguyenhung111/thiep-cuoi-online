@@ -116,10 +116,11 @@
     requestAnimationFrame(() => {
       setTimeout(() => {
         curtainOverlay.classList.add('open');
+        startScrollAnimations();
       }, 800);
     });
 
-    const autoTimer = setTimeout(dismissCurtain, 6000);
+    const autoTimer = setTimeout(dismissCurtain, 3800);
     curtainOverlay.addEventListener('click', () => {
       clearTimeout(autoTimer);
       dismissCurtain();

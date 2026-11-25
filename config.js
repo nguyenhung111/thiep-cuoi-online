@@ -41,7 +41,7 @@ window.WEDDING_CONFIG = {
     'Cảm ơn đã dành tình cảm cho chúng mình!\nSự hiện diện của bạn chính là món quà ý nghĩa nhất\nvà chúng mình vô cùng trân quý khi được cùng bạn chia sẻ\nniềm hạnh phúc trong ngày trọng đại này.',
 
   // 7. Nhạc nền (đường dẫn file .mp3 local)
-  musicUrl: 'public/assets/audio/wedding-bg-music.mp3',
+  musicUrl: 'public/assets/audio/vay-cuoi.mp3',
 
   // 7b. Google Sheets Web App URL (lưu Sổ Lưu Bút & RSVP chung cho mọi người xem)
   // Hướng dẫn cài đặt chi tiết trong file docs/google-sheets-setup.md
