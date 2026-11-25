@@ -113,25 +113,20 @@
   }
 
   if (curtainOverlay) {
-    requestAnimationFrame(() => {
-      setTimeout(() => {
-        curtainOverlay.classList.add('open');
-        startScrollAnimations();
-      }, 800);
-    });
-
-    const autoTimer = setTimeout(dismissCurtain, 3800);
-    curtainOverlay.addEventListener('click', () => {
-      clearTimeout(autoTimer);
-      dismissCurtain();
+    const openAndDismiss = () => {
+      if (curtainOverlay.classList.contains('open')) return;
+      // Phát nhạc đồng bộ ngay trong user gesture để iOS/Android/Chrome luôn cho phép
       tryPlayMusic();
-    });
+      curtainOverlay.classList.add('open');
+      startScrollAnimations();
+      setTimeout(dismissCurtain, reducedMotion ? 0 : 2200);
+    };
+
+    curtainOverlay.addEventListener('click', openAndDismiss);
     curtainOverlay.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        clearTimeout(autoTimer);
-        dismissCurtain();
-        tryPlayMusic();
+        openAndDismiss();
       }
     });
   } else {

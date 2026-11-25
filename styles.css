@@ -176,7 +176,7 @@ html, body {
   position: absolute;
   inset: 0;
   will-change: transform;
-  transition: transform 3s cubic-bezier(0.65, 0, 0.35, 1) 0.5s;
+  transition: transform 2.2s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .curtain-panel img {
@@ -201,20 +201,21 @@ html, body {
 
 .curtain-hint {
   position: absolute;
-  bottom: max(24px, env(safe-area-inset-bottom));
+  bottom: max(36px, env(safe-area-inset-bottom));
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
-  background: rgba(145, 25, 17, 0.78);
+  background: rgba(145, 25, 17, 0.88);
   color: #fff;
   font-family: 'Lora', serif;
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 0.08em;
-  padding: 8px 18px;
+  padding: 10px 22px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 215, 170, 0.5);
+  border: 1px solid rgba(255, 215, 170, 0.65);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
   pointer-events: none;
-  opacity: 0.9;
+  opacity: 0.95;
   transition: opacity 0.4s ease;
 }
 
