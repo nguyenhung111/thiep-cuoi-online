@@ -31,7 +31,7 @@ window.WEDDING_CONFIG = {
   brideFamilyTitle: 'NHÀ GÁI',
   brideParents: 'BÀ: NGUYỄN THỊ HUYỀN\nThôn Ninh Thôn (La Chàng cũ),\nxã Nguyễn Trãi, Hưng Yên',
   groomFamilyTitle: 'NHÀ TRAI',
-  groomParents: 'ÔNG: NGUYỄN VĂN THOÁI\nBÀ: NGUYỄN THỊ MAI\nThôn Phần Dương, xã Phạm Ngũ Lão,\nHưng Yên',
+  groomParents: 'ÔNG: NGUYỄN VĂN THOÁI\nBÀ: NGUYỄN THỊ MAI\nThôn Phần Dương,\nxã Phạm Ngũ Lão, Hưng Yên',
 
   // 5. Tên khách mời mặc định (nếu URL không có ?name=...)
   defaultGuestName: 'Tên Khách Mời',

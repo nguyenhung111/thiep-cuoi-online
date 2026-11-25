@@ -996,3 +996,45 @@ dialog.lightbox-dialog {
   border: 0;
   white-space: nowrap;
 }
+
+/* ==========================================================================
+   Calendar Heart Focus (Ngày cưới 27/12)
+   ========================================================================== */
+.cal-col-text {
+  display: block;
+  text-align: center;
+  padding-top: 8px;
+}
+
+.cal-heart-day {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  font-weight: 700;
+  color: #911911;
+}
+
+.cal-heart-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 34px;
+  height: 34px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  color: #911911;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cal-heart-svg {
+    animation: cal-heart-pulse 1.6s ease-in-out infinite;
+  }
+}
+
+@keyframes cal-heart-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.12); }
+}
