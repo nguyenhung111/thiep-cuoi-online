@@ -211,6 +211,7 @@
      ------------------------------------------------------------------------ */
   const bgAudio = document.getElementById('bg-music');
   const musicBtn = document.getElementById('music-fab');
+  let userPausedMusic = false;
 
   function syncMusicUI() {
     if (!musicBtn || !bgAudio) return;
@@ -224,30 +225,52 @@
   }
 
   function tryPlayMusic() {
-    if (!bgAudio || !bgAudio.paused) return;
+    if (!bgAudio || !bgAudio.paused || userPausedMusic) return;
     const p = bgAudio.play();
     if (p && typeof p.then === 'function') {
-      p.then(syncMusicUI).catch(() => {});
+      p.then(() => {
+        syncMusicUI();
+        removeUnlockListeners();
+      }).catch(() => {});
     }
+  }
+
+  function unlockOnce() {
+    tryPlayMusic();
+  }
+
+  function removeUnlockListeners() {
+    window.removeEventListener('pointerdown', unlockOnce);
+    window.removeEventListener('touchstart', unlockOnce);
+    window.removeEventListener('click', unlockOnce);
+    window.removeEventListener('keydown', unlockOnce);
   }
 
   if (musicBtn && bgAudio) {
     musicBtn.addEventListener('click', () => {
       if (bgAudio.paused) {
-        bgAudio.play().then(syncMusicUI).catch(() => {});
+        userPausedMusic = false;
+        bgAudio.play().then(() => {
+          syncMusicUI();
+          removeUnlockListeners();
+        }).catch(() => {});
       } else {
+        userPausedMusic = true;
         bgAudio.pause();
         syncMusicUI();
       }
     });
 
-    const unlockOnce = () => {
-      tryPlayMusic();
-      window.removeEventListener('pointerdown', unlockOnce);
-      window.removeEventListener('touchstart', unlockOnce);
-    };
+    bgAudio.addEventListener('play', syncMusicUI);
+    bgAudio.addEventListener('pause', syncMusicUI);
+
     window.addEventListener('pointerdown', unlockOnce, { passive: true });
     window.addEventListener('touchstart', unlockOnce, { passive: true });
+    window.addEventListener('click', unlockOnce, { passive: true });
+    window.addEventListener('keydown', unlockOnce);
+
+    // Thử tự động phát ngay khi mở thiệp (nếu trình duyệt cho phép)
+    tryPlayMusic();
   }
 
   /* ------------------------------------------------------------------------
