@@ -138,8 +138,8 @@
         sideKey: 'nha_gai',
         pageTitle: 'Quỳnh Trang & Văn Hưng · Thiệp Cưới Online',
         heroCoupleTitle: 'QUỲNH TRANG & VĂN HƯNG',
-        monogramLeft: 'T',
-        monogramRight: 'H',
+        monogramLeft: 'H',
+        monogramRight: 'T',
 
         // Hai thẻ chân dung: Cô dâu bên trái (trước), Chú rể bên phải (sau)
         firstRoleLabel: 'Cô dâu',
