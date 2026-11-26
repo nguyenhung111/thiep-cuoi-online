@@ -2,7 +2,7 @@
   'use strict';
 
   const CANVAS_WIDTH = 500;
-  const CANVAS_HEIGHT = 7322;
+  const CANVAS_HEIGHT = 7382;
   const reducedMotion =
     window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -86,7 +86,7 @@
   const guestName = (params.get('name') || params.get('guest') || '').trim();
   const visitorNode = document.getElementById('visitor-name-text');
   if (visitorNode) {
-    visitorNode.textContent = guestName || cfg.defaultGuestName || 'Tên Khách Mời';
+    visitorNode.textContent = guestName || cfg.defaultGuestName || 'Quý Khách';
   }
 
   /* ------------------------------------------------------------------------

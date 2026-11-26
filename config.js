@@ -16,9 +16,14 @@ window.WEDDING_CONFIG = {
 
   // 3. Thời gian & Địa điểm
   heroDate: '27.12.2026',
+  partyTitle: 'TIỆC MỪNG CHUNG VUI',
+  partyTime: 'VÀO LÚC 16:00, THỨ BẢY',
+  partyDatePipe: '26 | 12 | 2026',
+  partyLunarDate: '(Tức ngày 18 tháng 11 năm Bính Ngọ)',
+  ceremonyTitle: 'LỄ THÀNH HÔN',
   ceremonyTime: 'VÀO LÚC 11:15, CHỦ NHẬT',
   ceremonyDatePipe: '27 | 12 | 2026',
-  lunarDate: '(Tức ngày 19 tháng 11 năm Bính Ngọ)\nĐãi tiệc: 16:00, Thứ Bảy 26/12/2026 (18/11 ÂL)',
+  lunarDate: '(Tức ngày 19 tháng 11 năm Bính Ngọ)',
   venueName: 'TẠI TƯ GIA NHÀ TRAI',
   venueAddress: 'Thôn Phần Dương, xã Phạm Ngũ Lão,\ntỉnh Hưng Yên',
   mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Th%C3%B4n+Ph%E1%BA%A7n+D%C6%B0%C6%A1ng,+Ph%E1%BA%A1m+Ng%C5%A9+L%C3%A3o,+H%C6%B0ng+Y%C3%AAn',
@@ -29,12 +34,12 @@ window.WEDDING_CONFIG = {
 
   // 4. Thông tin hai gia đình
   brideFamilyTitle: 'NHÀ GÁI',
-  brideParents: 'BÀ: NGUYỄN THỊ HUYỀN\nThôn Ninh Thôn (La Chàng cũ),\nxã Nguyễn Trãi, Hưng Yên',
+  brideParents: 'BÀ: NGUYỄN THỊ HUYỀN',
   groomFamilyTitle: 'NHÀ TRAI',
-  groomParents: 'ÔNG: NGUYỄN VĂN THOÁI\nBÀ: NGUYỄN THỊ MAI\nThôn Phần Dương,\nxã Phạm Ngũ Lão, Hưng Yên',
+  groomParents: 'ÔNG: NGUYỄN VĂN THOÁI\nBÀ: NGUYỄN THỊ MAI',
 
   // 5. Tên khách mời mặc định (nếu URL không có ?name=...)
-  defaultGuestName: 'Tên Khách Mời',
+  defaultGuestName: 'Quý Khách',
 
   // 6. Lời cảm ơn cuối thiệp
   thankYouText:
