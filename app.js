@@ -2,7 +2,7 @@
   'use strict';
 
   const CANVAS_WIDTH = 500;
-  const CANVAS_HEIGHT = 7382;
+  const CANVAS_HEIGHT = 7782;
   const reducedMotion =
     window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -25,9 +25,51 @@
   window.addEventListener('resize', updateCanvasScale);
 
   /* ------------------------------------------------------------------------
-     2. Apply WEDDING_CONFIG + Visitor Name Personalization (?name=...)
+     2. Resolve Side (nha_trai | nha_gai) + Apply WEDDING_CONFIG + Visitor Name
      ------------------------------------------------------------------------ */
-  const cfg = window.WEDDING_CONFIG || {};
+  const params = new URLSearchParams(window.location.search);
+
+  function detectSideKey(rawConfig) {
+    const normalize = (val) => {
+      const s = (val || '').toLowerCase().trim();
+      if (!s) return '';
+      if (['nha_gai', 'nhagai', 'nha-gai', 'bride', 'codau', 'vuquy', 'gai'].includes(s)) {
+        return 'nha_gai';
+      }
+      if (['nha_trai', 'nhatrai', 'nha-trai', 'groom', 'chure', 'thanhhon', 'trai'].includes(s)) {
+        return 'nha_trai';
+      }
+      return '';
+    };
+
+    const fromQuery = normalize(params.get('side'));
+    if (fromQuery) return fromQuery;
+
+    const path = window.location.pathname.toLowerCase();
+    if (/\/(nha-gai|nhagai|bride|vu-quy)\b/.test(path)) return 'nha_gai';
+    if (/\/(nha-trai|nhatrai|groom|thanh-hon)\b/.test(path)) return 'nha_trai';
+
+    const host = window.location.hostname.toLowerCase();
+    if (/(nhagai|nha-gai|bride|quynhtrang|vuquy)/.test(host)) return 'nha_gai';
+    if (/(nhatrai|nha-trai|groom|vanhung|thanhhon)/.test(host)) return 'nha_trai';
+
+    return rawConfig.defaultSide || 'nha_trai';
+  }
+
+  const rawCfg = window.WEDDING_CONFIG || {};
+  const activeSideKey = detectSideKey(rawCfg);
+  const sideCfg = (rawCfg.sides && rawCfg.sides[activeSideKey]) || {};
+  const cfg = {
+    ...rawCfg,
+    ...sideCfg,
+    photos: { ...(rawCfg.photos || {}), ...(sideCfg.photos || {}) },
+    bank: { ...(rawCfg.bank || {}), ...(sideCfg.bank || {}) },
+  };
+
+  if (cfg.pageTitle) {
+    document.title = cfg.pageTitle;
+  }
+
   document.querySelectorAll('[data-field]').forEach((el) => {
     const key = el.dataset.field;
     if (key && cfg[key]) el.textContent = cfg[key];
@@ -39,7 +81,14 @@
   if (cfg.photos) {
     document.querySelectorAll('[data-photo]').forEach((img) => {
       const key = img.dataset.photo;
-      if (key && cfg.photos[key]) img.src = cfg.photos[key];
+      if (!key) return;
+      if (key === 'firstPortrait' && cfg.firstPortraitPhotoKey && cfg.photos[cfg.firstPortraitPhotoKey]) {
+        img.src = cfg.photos[cfg.firstPortraitPhotoKey];
+      } else if (key === 'secondPortrait' && cfg.secondPortraitPhotoKey && cfg.photos[cfg.secondPortraitPhotoKey]) {
+        img.src = cfg.photos[cfg.secondPortraitPhotoKey];
+      } else if (cfg.photos[key]) {
+        img.src = cfg.photos[key];
+      }
     });
     if (Array.isArray(cfg.photos.album) && cfg.photos.album.length) {
       const track = document.querySelector('.bd-alb-3d .track');
@@ -69,6 +118,7 @@
     if (qrImg && cfg.bank.bankBin && cfg.bank.accountNumber) {
       const nameParam = encodeURIComponent(cfg.bank.accountHolder || '');
       qrImg.src = `https://img.vietqr.io/image/${cfg.bank.bankBin}-${cfg.bank.accountNumber}-compact2.png?accountName=${nameParam}`;
+      qrImg.alt = `Mã QR ${cfg.bank.bankName || 'Ngân hàng'}`;
     }
     if (bankInfo) {
       bankInfo.innerHTML =
@@ -82,7 +132,46 @@
     }
   }
 
-  const params = new URLSearchParams(window.location.search);
+  const mapIframe = document.getElementById('venue-map-iframe');
+  if (mapIframe && cfg.mapEmbedUrl) {
+    mapIframe.src = cfg.mapEmbedUrl;
+  }
+
+  const addToCalBtn = document.getElementById('add-to-calendar-btn');
+  if (addToCalBtn && cfg.calendarEvent) {
+    const calUrl = new URL('https://www.google.com/calendar/render');
+    calUrl.searchParams.set('action', 'TEMPLATE');
+    calUrl.searchParams.set('text', cfg.calendarEvent.title || cfg.ceremonyTitle || 'Lễ Cưới');
+    if (cfg.calendarEvent.start && cfg.calendarEvent.end) {
+      calUrl.searchParams.set('dates', `${cfg.calendarEvent.start}/${cfg.calendarEvent.end}`);
+    }
+    calUrl.searchParams.set('ctz', 'Asia/Ho_Chi_Minh');
+    const locationText = [cfg.venueName, cfg.venueAddress]
+      .filter(Boolean)
+      .join(', ')
+      .replace(/\s+/g, ' ');
+    if (locationText) calUrl.searchParams.set('location', locationText);
+    if (cfg.calendarEvent.details) calUrl.searchParams.set('details', cfg.calendarEvent.details);
+    addToCalBtn.href = calUrl.toString();
+  }
+
+  const jumpRsvpBtn = document.getElementById('jump-rsvp-btn');
+  if (jumpRsvpBtn) {
+    jumpRsvpBtn.addEventListener('click', () => {
+      const rsvpSection = document.getElementById('rsvp-section') || document.getElementById('rsvp-form');
+      if (rsvpSection) {
+        rsvpSection.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
+      }
+    });
+  }
+
+  if (cfg.defaultGuestbookSide) {
+    const sideRadio = document.querySelector(
+      `input[name="gb-side-radio"][value="${cfg.defaultGuestbookSide}"]`
+    );
+    if (sideRadio) sideRadio.checked = true;
+  }
+
   const guestName = (params.get('name') || params.get('guest') || '').trim();
   const visitorNode = document.getElementById('visitor-name-text');
   if (visitorNode) {
