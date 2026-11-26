@@ -165,13 +165,21 @@
         ceremonyTitle: 'LỄ VU QUY',
         ...SHARED_SCHEDULE,
         ...SHARED_VENUE,
+        ceremonyTime: 'VÀO LÚC 11:45, CHỦ NHẬT',
+        countdownTarget: '2026-12-27T11:45:00+07:00',
+        venueName: 'TẠI TƯ GIA NHÀ GÁI',
+        venueAddress: 'Thôn Ninh Thôn (La Chàng cũ),\nxã Nguyễn Trãi, tỉnh Hưng Yên',
+        mapsUrl:
+          'https://www.google.com/maps/search/?api=1&query=Th%C3%B4n+Ninh+Th%C3%B4n,+x%C3%A3+Nguy%E1%BB%85n+Tr%C3%A3i,+t%E1%BB%89nh+H%C6%B0ng+Y%C3%AAn',
+        mapEmbedUrl:
+          'https://maps.google.com/maps?q=Th%C3%B4n+Ninh+Th%C3%B4n,+x%C3%A3+Nguy%E1%BB%85n+Tr%C3%A3i,+t%E1%BB%89nh+H%C6%B0ng+Y%C3%AAn&z=15&output=embed',
 
         calendarEvent: {
           title: 'Lễ Vu Quy Quỳnh Trang & Văn Hưng',
-          start: '20261227T111500',
+          start: '20261227T114500',
           end: '20261227T140000',
           details:
-            'Tiệc mừng: 16:00 Thứ Bảy 26/12/2026 · Lễ Vu Quy: 11:15 Chủ Nhật 27/12/2026',
+            'Tiệc mừng: 16:00 Thứ Bảy 26/12/2026 · Lễ Vu Quy: 11:45 Chủ Nhật 27/12/2026',
         },
 
         defaultGuestbookSide: 'nha_gai',
