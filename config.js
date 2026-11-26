@@ -125,12 +125,12 @@
 
         defaultGuestbookSide: 'nha_trai',
 
-        // QR Mừng cưới riêng của Nhà Trai (sẽ cập nhật STK riêng sau)
+        // QR Mừng cưới riêng của Nhà Trai
         bank: {
-          bankName: 'VietinBank',
-          bankBin: '970415',
-          accountNumber: '0869259444',
-          accountHolder: 'Vương Huy Trường',
+          bankName: 'VPBank',
+          bankBin: '970432',
+          accountNumber: '268636609',
+          accountHolder: 'NGUYEN VAN HUNG',
         },
       },
 
@@ -182,12 +182,12 @@
 
         defaultGuestbookSide: 'nha_gai',
 
-        // QR Mừng cưới riêng của Nhà Gái (tạm giữ nguyên, sẽ cập nhật STK riêng sau)
+        // QR Mừng cưới riêng của Nhà Gái
         bank: {
-          bankName: 'VietinBank',
-          bankBin: '970415',
-          accountNumber: '0869259444',
-          accountHolder: 'Vương Huy Trường',
+          bankName: 'Techcombank',
+          bankBin: '970407',
+          accountNumber: '19039052481011',
+          accountHolder: 'PHAM QUYNH TRANG',
         },
       },
     },
