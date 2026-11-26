@@ -37,10 +37,9 @@
   const SHARED_VENUE = {
     venueName: 'TẠI TƯ GIA NHÀ TRAI',
     venueAddress: 'Thôn Phần Dương, xã Phạm Ngũ Lão,\ntỉnh Hưng Yên',
-    mapsUrl:
-      'https://www.google.com/maps/search/?api=1&query=Th%C3%B4n+Ph%E1%BA%A7n+D%C6%B0%C6%A1ng,+Ph%E1%BA%A1m+Ng%C5%A9+L%C3%A3o,+H%C6%B0ng+Y%C3%AAn',
+    mapsUrl: 'https://maps.app.goo.gl/Uejpb5EgWAXCz3Jf7',
     mapEmbedUrl:
-      'https://maps.google.com/maps?q=Th%C3%B4n+Ph%E1%BA%A7n+D%C6%B0%C6%A1ng,+Ph%E1%BA%A1m+Ng%C5%A9+L%C3%A3o,+H%C6%B0ng+Y%C3%AAn&z=15&output=embed',
+      'https://maps.google.com/maps?q=20.8592905,106.0780753&z=16&output=embed',
   };
 
   const SHARED_SCHEDULE = {
@@ -169,10 +168,9 @@
         countdownTarget: '2026-12-27T11:45:00+07:00',
         venueName: 'TẠI TƯ GIA NHÀ GÁI',
         venueAddress: 'Thôn Ninh Thôn (La Chàng cũ),\nxã Nguyễn Trãi, tỉnh Hưng Yên',
-        mapsUrl:
-          'https://www.google.com/maps/search/?api=1&query=Th%C3%B4n+Ninh+Th%C3%B4n,+x%C3%A3+Nguy%E1%BB%85n+Tr%C3%A3i,+t%E1%BB%89nh+H%C6%B0ng+Y%C3%AAn',
+        mapsUrl: 'https://maps.app.goo.gl/jVdFegVpByAMa8bT8',
         mapEmbedUrl:
-          'https://maps.google.com/maps?q=Th%C3%B4n+Ninh+Th%C3%B4n,+x%C3%A3+Nguy%E1%BB%85n+Tr%C3%A3i,+t%E1%BB%89nh+H%C6%B0ng+Y%C3%AAn&z=15&output=embed',
+          'https://maps.google.com/maps?q=20.782653,106.090092&z=16&output=embed',
 
         calendarEvent: {
           title: 'Lễ Vu Quy Quỳnh Trang & Văn Hưng',
