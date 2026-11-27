@@ -27,16 +27,16 @@ All 51 assets from `https://thiepcuoimeli.com/showcase/13bb7177-ccda-49d0-a74b-6
 | Asset | Local Path | Native Dimensions | Aspect Ratio | `object-fit` | Used In |
 |---|---|---|---|---|---|
 | Paper Texture | `public/assets/bg/paper-texture.jpg` | `800×800` | `1:1` | `cover` | Sections 02, 04, 05, 06, 07, 09 |
-| Groom & Bride BG | `public/assets/bg/groom-bride-bg.jpg` | `1365×2048` | `2:3` | `cover` | Section 03 |
-| Thank You BG | `public/assets/bg/thank-you-bg.jpg` | `1365×2048` | `2:3` | `cover` | Section 10 |
-| Hero Cover | `public/assets/photos/hero-cover.jpg` | `1365×2048` | `2:3` | `cover` | Section 01 |
-| Story Intro | `public/assets/photos/story-intro.jpg` | `1365×2048` | `2:3` | `cover` | Section 02 |
-| Groom Portrait | `public/assets/photos/groom-portrait.jpg` | `1365×2048` | `2:3` | `cover` | Section 03 |
-| Bride Portrait | `public/assets/photos/bride-portrait.jpg` | `1365×2048` | `2:3` | `cover` | Section 03 |
-| Forever Banner | `public/assets/photos/forever-banner.jpg` | `1365×2048` | `2:3` | `cover` | Section 05 |
-| Moment Right | `public/assets/photos/moment-right.jpg` | `1365×2048` | `2:3` | `cover` | Section 07 |
-| Moment Left | `public/assets/photos/moment-left.jpg` | `1365×2048` | `2:3` | `cover` | Section 07 |
-| Moment Bottom | `public/assets/photos/moment-bottom.jpg` | `1365×2048` | `2:3` | `cover` | Section 07 |
+| Groom & Bride BG | `public/assets/album/album-06.jpg` | `1365×2048` | `2:3` | `cover` | Section 03 |
+| Thank You BG | `public/assets/album/album-05.jpg` | `1365×2048` | `2:3` | `cover` | Section 10 |
+| Hero Cover | `public/assets/album/album-03.jpg` | `1365×2048` | `2:3` | `cover` | Section 01 |
+| Story Intro | `public/assets/album/album-07.jpg` | `1365×2048` | `2:3` | `cover` | Section 02 |
+| Groom Portrait | `public/assets/album/album-09.jpg` | `1365×2048` | `2:3` | `cover` | Section 03 |
+| Bride Portrait | `public/assets/album/album-11.jpg` | `1365×2048` | `2:3` | `cover` | Section 03 |
+| Forever Banner | `public/assets/album/album-05.jpg` | `1365×2048` | `2:3` | `cover` | Section 05 |
+| Moment Right | `public/assets/album/album-12.jpg` | `1365×2048` | `2:3` | `cover` | Section 07 |
+| Moment Left | `public/assets/album/album-01.jpg` | `1365×2048` | `2:3` | `cover` | Section 07 |
+| Moment Bottom | `public/assets/album/album-16.jpg` | `1365×2048` | `2:3` | `cover` | Section 07 |
 | Album 01–16 | `public/assets/album/album-01.jpg` … `album-16.jpg` | `1365×2048` | `2:3` | `cover` (3:4 slide) | Section 08 + Lightbox |
 
 ## 4. Decorative Elements (`public/assets/decor/`)

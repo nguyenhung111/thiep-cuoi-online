@@ -4,15 +4,15 @@
  */
 (function () {
   const COMMON_PHOTOS = {
-    hero: 'public/assets/photos/hero-cover.jpg',
-    storyIntro: 'public/assets/photos/story-intro.jpg',
-    groomPortrait: 'public/assets/photos/groom-portrait.jpg',
-    bridePortrait: 'public/assets/photos/bride-portrait.jpg',
-    foreverBanner: 'public/assets/photos/forever-banner.jpg',
-    momentRight: 'public/assets/photos/moment-right.jpg',
-    momentLeft: 'public/assets/photos/moment-left.jpg',
-    momentBottom: 'public/assets/photos/moment-bottom.jpg',
-    thankYouBg: 'public/assets/bg/thank-you-bg.jpg',
+    hero: 'public/assets/album/album-03.jpg',
+    storyIntro: 'public/assets/album/album-07.jpg',
+    groomPortrait: 'public/assets/album/album-09.jpg',
+    bridePortrait: 'public/assets/album/album-11.jpg',
+    foreverBanner: 'public/assets/album/album-05.jpg',
+    momentRight: 'public/assets/album/album-12.jpg',
+    momentLeft: 'public/assets/album/album-01.jpg',
+    momentBottom: 'public/assets/album/album-16.jpg',
+    thankYouBg: 'public/assets/album/album-05.jpg',
     album: [
       'public/assets/album/album-01.jpg',
       'public/assets/album/album-02.jpg',
