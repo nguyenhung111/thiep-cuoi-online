@@ -548,7 +548,7 @@
 
   if (qrCopyBtn) {
     qrCopyBtn.addEventListener('click', () => {
-      const accNo = cfg.bank?.accountNumber || '0869259444';
+      const accNo = cfg.bank?.accountNumber || '268636609';
       navigator.clipboard?.writeText(accNo).then(() => {
         qrCopyBtn.textContent = 'Đã sao chép STK!';
         setTimeout(() => {
