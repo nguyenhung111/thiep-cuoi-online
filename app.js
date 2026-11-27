@@ -2,7 +2,7 @@
   'use strict';
 
   const CANVAS_WIDTH = 500;
-  const CANVAS_HEIGHT = 7782;
+  const CANVAS_HEIGHT = 7902;
   const reducedMotion =
     window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
