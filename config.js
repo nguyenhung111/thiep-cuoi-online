@@ -43,7 +43,7 @@
   };
 
   const SHARED_SCHEDULE = {
-    heroDate: '27.12.2026',
+    heroDate: '27 . 12 . 2026',
     ceremonyTime: 'VÀO LÚC 11:15, CHỦ NHẬT',
     ceremonyDay: '27',
     ceremonyMonth: 'Tháng 12',
