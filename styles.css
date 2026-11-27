@@ -71,14 +71,6 @@
   font-display: swap;
   src: url('public/assets/fonts/uvn-hoa-tay-1.ttf') format('truetype');
 }
-@font-face {
-  font-family: 'Carlytte';
-  font-style: normal;
-  font-weight: normal;
-  font-display: swap;
-  src: url('public/assets/fonts/carlytte.woff2') format('woff2'),
-       url('public/assets/fonts/carlytte.woff') format('woff');
-}
 
 /* ==========================================================================
    Base Layout & Canvas Framing
